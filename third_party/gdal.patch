@@ -1,0 +1,33 @@
+diff --git a/port/cpl_vsil_curl.cpp b/port/cpl_vsil_curl.cpp
+index 9334b93..ab69400 100644
+--- a/port/cpl_vsil_curl.cpp
++++ b/port/cpl_vsil_curl.cpp
+@@ -4651,7 +4651,6 @@ void NetworkStatisticsLogger::ReadEnabled()
+         if( !bRegistered )
+         {
+             bRegistered = true;
+-            atexit( ShowNetworkStats );
+         }
+     }
+ }
+
+diff --git a/swig/python/osgeo/osr.py b/swig/python/osgeo/osr.py
+index bd2d4c3..2ebd253 100644
+--- a/swig/python/osgeo/osr.py
++++ b/swig/python/osgeo/osr.py
+@@ -4,6 +4,8 @@
+ # Do not make changes to this file unless you know what you are doing--modify
+ # the SWIG interface file instead.
+ 
++import os
++
+ from sys import version_info as _swig_python_version_info
+ if _swig_python_version_info < (2, 7, 0):
+     raise RuntimeError("Python 2.7 or later required")
+@@ -1093,4 +1095,4 @@ def GetPROJAuxDbPaths(*args):
+     r"""GetPROJAuxDbPaths() -> char **"""
+     return _osr.GetPROJAuxDbPaths(*args)
+ 
+-
++_osr.SetPROJSearchPath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'proj/proj_data'))
+\ No newline at end of file
