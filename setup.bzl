@@ -31,8 +31,14 @@ def configure_rust_toolchain():
             )],
             "gdal-sys": [crate.annotation(
                 build_script_env = {"GDAL_VERSION": "3.5.1"},
-                deps = ["@//third_party:gdal_cc"],
+                deps = ["@gdal"],
             )],
+            "rustls-ffi": [
+                crate.annotation(
+                    extra_aliased_targets = {"rustls-ffi_cc": "hdr"},
+                    additive_build_file = "@//third_party:rustls-ffi.BUILD",
+                ),
+            ],
         },
         splicing_config = splicing_config(
             resolver_version = "2",

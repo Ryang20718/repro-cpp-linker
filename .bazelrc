@@ -1,3 +1,7 @@
+
+build --cxxopt=-std=c++17 --host_cxxopt=-std=c++17
+build --@rules_rust//rust/settings:experimental_use_cc_common_link=true
+
 build --incompatible_enable_cc_toolchain_resolution
 
-common --experimental_cc_shared_library
+common --experimental_cc_shared_library --noenable_bzlmod

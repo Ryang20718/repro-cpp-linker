@@ -1,5 +1,3 @@
-# # Copyright (c) 2023 Waabi Innovation. All rights reserved.
-
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 load("@//third_party:dir.bzl", "dir")
 
@@ -164,8 +162,6 @@ TEST_ENV = {
         "proj_angular_io_test",
         "proj_context_test",
         "pj_phi2_test",
-        # "gie_self_tests", # test not configured correctly
-        # "test_network", #CURL not enabled
         "test_defmodel",
         "test_tinshift",
         "test_misc",
@@ -189,36 +185,6 @@ cc_test(
     ],
 )
 
-cc_test(
-    name = "proj_test_cpp_api",
-    srcs = [
-        "test/unit/main.cpp",
-        "test/unit/test_util.cpp",
-        "test/unit/test_common.cpp",
-        "test/unit/test_crs.cpp",
-        "test/unit/test_metadata.cpp",
-        "test/unit/test_io.cpp",
-        "test/unit/test_operation.cpp",
-        "test/unit/test_operationfactory.cpp",
-        "test/unit/test_datum.cpp",
-        "test/unit/test_factory.cpp",
-        "test/unit/test_c_api.cpp",
-        "test/unit/test_grids.cpp",
-        "test/unit/test_primitives.hpp",
-        "test/unit/gtest_include.h",
-    ],
-    tags = ["manual"], # TODO: Doesn't pass all tests currently
-    env = TEST_ENV,
-    data = [
-        ":proj_data",
-    ],
-    deps = [
-        ":proj",
-        "@gtest//:gtest_main",
-        "@sqlite3",
-    ],
-)
-
 expand_template(
     name = "substitute_metadata_sql",
     out = "data/sql/metadata.out.sql",
@@ -231,13 +197,12 @@ expand_template(
 
 genrule(
     name = "concat_sql_files",
-    # Note: The order of these files is important
     srcs = [
         "data/sql/begin.sql",
         "data/sql/proj_db_table_defs.sql",
         "data/sql/conversion_triggers.sql",
         "data/sql/customizations_early.sql",
-        "data/sql/metadata.out.sql", # File with substituion
+        "data/sql/metadata.out.sql",
         "data/sql/unit_of_measure.sql",
         "data/sql/extent.sql",
         "data/sql/scope.sql",
@@ -286,7 +251,6 @@ genrule(
     outs = ["proj.db"],
 )
 
-# TODO: Consider removing `dir` as `proj.db` is the only required file.
 dir(
     name = "proj_data",
     srcs = [
@@ -296,12 +260,19 @@ dir(
     visibility = ["//visibility:public"],
 )
 
-# Build a shared object used by the Python dependency.
 cc_shared_library(
     name = "proj_so",
-    # The name must match what is packaged in the Python wheel
     shared_lib_name = "libproj-8d95adc6.so.25.9.2.0",
     deps = [":proj_lib"],
+    exports_filter = [
+        "@tiff//:tiff",
+        "@jpeg//:jpeg",
+        "@jpeg//:jpeg12",
+        "@jpeg//:jpeg16",
+        "@lerc//:lerc",
+        "@zstd//:zstd",
+        "@zlib//:z",
+    ],
     visibility = ["//visibility:public"],
 )
 

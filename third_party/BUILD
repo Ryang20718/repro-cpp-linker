@@ -1,3 +1,5 @@
+exports_files(["curl_config.h"])
+
 cc_library(
     name = "libpthread",
     linkopts = select({

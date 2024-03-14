@@ -1,5 +1,3 @@
-# Copyright (c) 2023 Waabi Innovation. All rights reserved.
-
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 
 expand_template(

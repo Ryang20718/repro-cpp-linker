@@ -17,7 +17,7 @@ SPECIALIZED_COPTS = select({
 
 copy_file(
     name = "expand_gdal_version",
-    src = "gcore/gdal_version.h.in", # Doesn't actually modify the file
+    src = "gcore/gdal_version.h.in", 
     out = "gdal_version/gdal_version.h",
 )
 
@@ -378,7 +378,6 @@ cc_library(
     includes = ["ogr", "ogr/ogrsf_frmts", "ogr/ogrsf_frmts/geojson", "ogr/ogrsf_frmts/generic"],
 )
 
-# Private headers used by the different components of GDAL
 cc_library(
     name = "gdal_standard_includes",
     hdrs = [
@@ -891,8 +890,6 @@ cc_library(
 
 cc_shared_library(
     name = "gdal_so",
-    # `libgdal.so.31` was the name of the shared object used by the version
-    # of GDAL distributed through pypi.
     shared_lib_name = "libgdal.so.31",
     deps = [
         ":alg",
@@ -960,4 +957,3 @@ EXTENSIONS = {
     )
     for (name, src) in EXTENSIONS.items()
 ]
-

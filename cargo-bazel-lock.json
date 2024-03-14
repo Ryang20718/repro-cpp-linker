@@ -1,5 +1,5 @@
 {
-  "checksum": "e424f0d476b8374b840682fad825fb6a58898ac9607d0fb4b0e0ef7d17d3913c",
+  "checksum": "d42df777c5fdea32e4abd2de28b131042af48891f2cfd726a53ddfefe7fa719e",
   "crates": {
     "approx 0.5.1": {
       "name": "approx",
@@ -87,6 +87,49 @@
       ],
       "license_file": null
     },
+    "base64 0.21.7": {
+      "name": "base64",
+      "version": "0.21.7",
+      "package_url": "https://github.com/marshallpierce/rust-base64",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/base64/0.21.7/download",
+          "sha256": "9d297deb1925b89f2ccc13d7635fa0714f12c87adce1c75356b39ca9b7178567"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "base64",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "base64",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": {
+          "common": [
+            "alloc",
+            "std"
+          ],
+          "selects": {}
+        },
+        "edition": "2018",
+        "version": "0.21.7"
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
     "bitflags 2.3.1": {
       "name": "bitflags",
       "version": "2.3.1",
@@ -117,6 +160,78 @@
         "version": "2.3.1"
       },
       "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "cc 1.0.90": {
+      "name": "cc",
+      "version": "1.0.90",
+      "package_url": "https://github.com/rust-lang/cc-rs",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/cc/1.0.90/download",
+          "sha256": "8cd6604a82acf3039f1144f54b8eb34e91ffba622051189e71b781822d5ee1f5"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "cc",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "cc",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "edition": "2018",
+        "version": "1.0.90"
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "cfg-if 1.0.0": {
+      "name": "cfg-if",
+      "version": "1.0.0",
+      "package_url": "https://github.com/alexcrichton/cfg-if",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/cfg-if/1.0.0/download",
+          "sha256": "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "cfg_if",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "cfg_if",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "edition": "2018",
+        "version": "1.0.0"
+      },
+      "license": "MIT/Apache-2.0",
       "license_ids": [
         "Apache-2.0",
         "MIT"
@@ -344,7 +459,7 @@
         },
         "extra_deps": {
           "common": [
-            "@//third_party:gdal_cc"
+            "@gdal//:gdal"
           ],
           "selects": {}
         },
@@ -436,6 +551,64 @@
         },
         "edition": "2021",
         "version": "0.7.9"
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "getrandom 0.2.12": {
+      "name": "getrandom",
+      "version": "0.2.12",
+      "package_url": "https://github.com/rust-random/getrandom",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/getrandom/0.2.12/download",
+          "sha256": "190092ea657667030ac6a35e305e62fc4dd69fd98ac98631e5d3a2b1575a12b5"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "getrandom",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "getrandom",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "cfg-if 1.0.0",
+              "target": "cfg_if"
+            }
+          ],
+          "selects": {
+            "cfg(target_os = \"wasi\")": [
+              {
+                "id": "wasi 0.11.0+wasi-snapshot-preview1",
+                "target": "wasi"
+              }
+            ],
+            "cfg(unix)": [
+              {
+                "id": "libc 0.2.151",
+                "target": "libc"
+              }
+            ]
+          }
+        },
+        "edition": "2018",
+        "version": "0.2.12"
       },
       "license": "MIT OR Apache-2.0",
       "license_ids": [
@@ -567,6 +740,42 @@
         "data_glob": [
           "**"
         ]
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "log 0.4.21": {
+      "name": "log",
+      "version": "0.4.21",
+      "package_url": "https://github.com/rust-lang/log",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/log/0.4.21/download",
+          "sha256": "90ed8c1e510134f979dbc4f070f87d4313098b704861a105fe34231c70a3901c"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "log",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "log",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "edition": "2021",
+        "version": "0.4.21"
       },
       "license": "MIT OR Apache-2.0",
       "license_ids": [
@@ -1161,6 +1370,10 @@
             {
               "id": "gdal-sys 0.9.0",
               "target": "gdal_sys"
+            },
+            {
+              "id": "rustls-ffi 0.12.0",
+              "target": "rustls_ffi"
             }
           ],
           "selects": {}
@@ -1170,6 +1383,469 @@
       },
       "license": null,
       "license_ids": [],
+      "license_file": null
+    },
+    "ring 0.17.8": {
+      "name": "ring",
+      "version": "0.17.8",
+      "package_url": "https://github.com/briansmith/ring",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/ring/0.17.8/download",
+          "sha256": "c17fa4cb658e3583423e915b9f3acc01cceaee1860e33d59ebae66adc3a2dc0d"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "ring",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        },
+        {
+          "BuildScript": {
+            "crate_name": "build_script_build",
+            "crate_root": "build.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "ring",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": {
+          "common": [
+            "alloc",
+            "default",
+            "dev_urandom_fallback"
+          ],
+          "selects": {}
+        },
+        "deps": {
+          "common": [
+            {
+              "id": "cfg-if 1.0.0",
+              "target": "cfg_if"
+            },
+            {
+              "id": "getrandom 0.2.12",
+              "target": "getrandom"
+            },
+            {
+              "id": "ring 0.17.8",
+              "target": "build_script_build"
+            },
+            {
+              "id": "untrusted 0.9.0",
+              "target": "untrusted"
+            }
+          ],
+          "selects": {
+            "cfg(all(any(target_os = \"android\", target_os = \"linux\"), any(target_arch = \"aarch64\", target_arch = \"arm\")))": [
+              {
+                "id": "libc 0.2.151",
+                "target": "libc"
+              }
+            ],
+            "cfg(all(target_arch = \"aarch64\", target_os = \"windows\"))": [
+              {
+                "id": "windows-sys 0.52.0",
+                "target": "windows_sys"
+              }
+            ],
+            "cfg(any(target_arch = \"aarch64\", target_arch = \"arm\", target_arch = \"x86\", target_arch = \"x86_64\"))": [
+              {
+                "id": "spin 0.9.8",
+                "target": "spin"
+              }
+            ]
+          }
+        },
+        "edition": "2021",
+        "version": "0.17.8"
+      },
+      "build_script_attrs": {
+        "data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "cc 1.0.90",
+              "target": "cc"
+            }
+          ],
+          "selects": {}
+        },
+        "links": "ring_core_0_17_8"
+      },
+      "license": null,
+      "license_ids": [],
+      "license_file": "LICENSE"
+    },
+    "rustls 0.22.2": {
+      "name": "rustls",
+      "version": "0.22.2",
+      "package_url": "https://github.com/rustls/rustls",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/rustls/0.22.2/download",
+          "sha256": "e87c9956bd9807afa1f77e0f7594af32566e830e088a5576d27c5b6f30f49d41"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "rustls",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        },
+        {
+          "BuildScript": {
+            "crate_name": "build_script_build",
+            "crate_root": "build.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "rustls",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": {
+          "common": [
+            "default",
+            "log",
+            "logging",
+            "ring",
+            "tls12"
+          ],
+          "selects": {}
+        },
+        "deps": {
+          "common": [
+            {
+              "id": "log 0.4.21",
+              "target": "log"
+            },
+            {
+              "id": "ring 0.17.8",
+              "target": "ring"
+            },
+            {
+              "id": "rustls 0.22.2",
+              "target": "build_script_build"
+            },
+            {
+              "id": "rustls-pki-types 1.3.1",
+              "target": "rustls_pki_types",
+              "alias": "pki_types"
+            },
+            {
+              "id": "rustls-webpki 0.102.2",
+              "target": "webpki"
+            },
+            {
+              "id": "subtle 2.5.0",
+              "target": "subtle"
+            },
+            {
+              "id": "zeroize 1.7.0",
+              "target": "zeroize"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.22.2"
+      },
+      "build_script_attrs": {
+        "data_glob": [
+          "**"
+        ],
+        "link_deps": {
+          "common": [
+            {
+              "id": "ring 0.17.8",
+              "target": "ring"
+            }
+          ],
+          "selects": {}
+        }
+      },
+      "license": "Apache-2.0 OR ISC OR MIT",
+      "license_ids": [
+        "Apache-2.0",
+        "ISC",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "rustls-ffi 0.12.0": {
+      "name": "rustls-ffi",
+      "version": "0.12.0",
+      "package_url": "https://github.com/rustls/rustls-ffi",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/rustls-ffi/0.12.0/download",
+          "sha256": "5e428f15838fc98872898d0759fa439f80afdc97b18650ee14da9644a04788fe"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "rustls_ffi",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        },
+        {
+          "BuildScript": {
+            "crate_name": "build_script_build",
+            "crate_root": "build.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "rustls_ffi",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "libc 0.2.151",
+              "target": "libc"
+            },
+            {
+              "id": "log 0.4.21",
+              "target": "log"
+            },
+            {
+              "id": "rustls 0.22.2",
+              "target": "rustls"
+            },
+            {
+              "id": "rustls-ffi 0.12.0",
+              "target": "build_script_build"
+            },
+            {
+              "id": "rustls-pemfile 2.1.1",
+              "target": "rustls_pemfile"
+            },
+            {
+              "id": "rustls-pki-types 1.3.1",
+              "target": "rustls_pki_types",
+              "alias": "pki_types"
+            },
+            {
+              "id": "rustls-webpki 0.102.2",
+              "target": "webpki"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.12.0"
+      },
+      "build_script_attrs": {
+        "data_glob": [
+          "**"
+        ],
+        "links": "rustls_ffi"
+      },
+      "license": "Apache-2.0/ISC/MIT",
+      "license_ids": [
+        "Apache-2.0",
+        "ISC",
+        "MIT"
+      ],
+      "license_file": null,
+      "additive_build_file_content": "cc_library(\n    name = \"hdr\",\n    hdrs = [\n        \"src/rustls.h\"\n    ],\n    includes = [\n        \"src\",\n    ],\n    visibility = [\"//visibility:public\"],\n    deps = [\n        \":rustls_ffi\",\n    ]\n)\n",
+      "extra_aliased_targets": {
+        "rustls-ffi_cc": "hdr"
+      }
+    },
+    "rustls-pemfile 2.1.1": {
+      "name": "rustls-pemfile",
+      "version": "2.1.1",
+      "package_url": "https://github.com/rustls/pemfile",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/rustls-pemfile/2.1.1/download",
+          "sha256": "f48172685e6ff52a556baa527774f61fcaa884f59daf3375c62a3f1cd2549dab"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "rustls_pemfile",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "rustls_pemfile",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": {
+          "common": [
+            "default",
+            "std"
+          ],
+          "selects": {}
+        },
+        "deps": {
+          "common": [
+            {
+              "id": "base64 0.21.7",
+              "target": "base64"
+            },
+            {
+              "id": "rustls-pki-types 1.3.1",
+              "target": "rustls_pki_types",
+              "alias": "pki_types"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2018",
+        "version": "2.1.1"
+      },
+      "license": "Apache-2.0 OR ISC OR MIT",
+      "license_ids": [
+        "Apache-2.0",
+        "ISC",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "rustls-pki-types 1.3.1": {
+      "name": "rustls-pki-types",
+      "version": "1.3.1",
+      "package_url": "https://github.com/rustls/pki-types",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/rustls-pki-types/1.3.1/download",
+          "sha256": "5ede67b28608b4c60685c7d54122d4400d90f62b40caee7700e700380a390fa8"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "rustls_pki_types",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "rustls_pki_types",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": {
+          "common": [
+            "alloc",
+            "default",
+            "std"
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "1.3.1"
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "rustls-webpki 0.102.2": {
+      "name": "rustls-webpki",
+      "version": "0.102.2",
+      "package_url": "https://github.com/rustls/webpki",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/rustls-webpki/0.102.2/download",
+          "sha256": "faaa0a62740bedb9b2ef5afa303da42764c012f743917351dc9a237ea1663610"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "webpki",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "webpki",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": {
+          "common": [
+            "alloc",
+            "default",
+            "ring",
+            "std"
+          ],
+          "selects": {}
+        },
+        "deps": {
+          "common": [
+            {
+              "id": "ring 0.17.8",
+              "target": "ring"
+            },
+            {
+              "id": "rustls-pki-types 1.3.1",
+              "target": "rustls_pki_types",
+              "alias": "pki_types"
+            },
+            {
+              "id": "untrusted 0.9.0",
+              "target": "untrusted"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.102.2"
+      },
+      "license": "ISC",
+      "license_ids": [
+        "ISC"
+      ],
       "license_file": null
     },
     "semver 1.0.17": {
@@ -1371,6 +2047,82 @@
       "license_ids": [
         "Apache-2.0",
         "MIT"
+      ],
+      "license_file": null
+    },
+    "spin 0.9.8": {
+      "name": "spin",
+      "version": "0.9.8",
+      "package_url": "https://github.com/mvdnes/spin-rs.git",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/spin/0.9.8/download",
+          "sha256": "6980e8d7511241f8acf4aebddbb1ff938df5eebe98691418c4468d0b72a96a67"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "spin",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "spin",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": {
+          "common": [
+            "once"
+          ],
+          "selects": {}
+        },
+        "edition": "2015",
+        "version": "0.9.8"
+      },
+      "license": "MIT",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "subtle 2.5.0": {
+      "name": "subtle",
+      "version": "2.5.0",
+      "package_url": "https://github.com/dalek-cryptography/subtle",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/subtle/2.5.0/download",
+          "sha256": "81cdd64d312baedb58e21336b31bc043b77e01cc99033ce76ef539f78e965ebc"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "subtle",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "subtle",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "edition": "2018",
+        "version": "2.5.0"
+      },
+      "license": "BSD-3-Clause",
+      "license_ids": [
+        "BSD-3-Clause"
       ],
       "license_file": null
     },
@@ -1596,6 +2348,661 @@
         "Unicode-DFS-2016"
       ],
       "license_file": null
+    },
+    "untrusted 0.9.0": {
+      "name": "untrusted",
+      "version": "0.9.0",
+      "package_url": "https://github.com/briansmith/untrusted",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/untrusted/0.9.0/download",
+          "sha256": "8ecb6da28b8a351d773b68d5825ac39017e680750f980f3a1a85cd8dd28a47c1"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "untrusted",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "untrusted",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "edition": "2018",
+        "version": "0.9.0"
+      },
+      "license": "ISC",
+      "license_ids": [
+        "ISC"
+      ],
+      "license_file": null
+    },
+    "wasi 0.11.0+wasi-snapshot-preview1": {
+      "name": "wasi",
+      "version": "0.11.0+wasi-snapshot-preview1",
+      "package_url": "https://github.com/bytecodealliance/wasi",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/wasi/0.11.0+wasi-snapshot-preview1/download",
+          "sha256": "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "wasi",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "wasi",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "edition": "2018",
+        "version": "0.11.0+wasi-snapshot-preview1"
+      },
+      "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "windows-sys 0.52.0": {
+      "name": "windows-sys",
+      "version": "0.52.0",
+      "package_url": "https://github.com/microsoft/windows-rs",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/windows-sys/0.52.0/download",
+          "sha256": "282be5f36a8ce781fad8c8ae18fa3f9beff57ec1b52cb3de0789201425d9a33d"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "windows_sys",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "windows_sys",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "windows-targets 0.52.4",
+              "target": "windows_targets"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.52.0"
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "windows-targets 0.52.4": {
+      "name": "windows-targets",
+      "version": "0.52.4",
+      "package_url": "https://github.com/microsoft/windows-rs",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/windows-targets/0.52.4/download",
+          "sha256": "7dd37b7e5ab9018759f893a1952c9420d060016fc19a472b4bb20d1bdd694d1b"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "windows_targets",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "windows_targets",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [],
+          "selects": {
+            "aarch64-pc-windows-gnullvm": [
+              {
+                "id": "windows_aarch64_gnullvm 0.52.4",
+                "target": "windows_aarch64_gnullvm"
+              }
+            ],
+            "cfg(all(target_arch = \"aarch64\", target_env = \"msvc\", not(windows_raw_dylib)))": [
+              {
+                "id": "windows_aarch64_msvc 0.52.4",
+                "target": "windows_aarch64_msvc"
+              }
+            ],
+            "cfg(all(target_arch = \"x86\", target_env = \"gnu\", not(windows_raw_dylib)))": [
+              {
+                "id": "windows_i686_gnu 0.52.4",
+                "target": "windows_i686_gnu"
+              }
+            ],
+            "cfg(all(target_arch = \"x86\", target_env = \"msvc\", not(windows_raw_dylib)))": [
+              {
+                "id": "windows_i686_msvc 0.52.4",
+                "target": "windows_i686_msvc"
+              }
+            ],
+            "cfg(all(target_arch = \"x86_64\", target_env = \"gnu\", not(target_abi = \"llvm\"), not(windows_raw_dylib)))": [
+              {
+                "id": "windows_x86_64_gnu 0.52.4",
+                "target": "windows_x86_64_gnu"
+              }
+            ],
+            "cfg(all(target_arch = \"x86_64\", target_env = \"msvc\", not(windows_raw_dylib)))": [
+              {
+                "id": "windows_x86_64_msvc 0.52.4",
+                "target": "windows_x86_64_msvc"
+              }
+            ],
+            "x86_64-pc-windows-gnullvm": [
+              {
+                "id": "windows_x86_64_gnullvm 0.52.4",
+                "target": "windows_x86_64_gnullvm"
+              }
+            ]
+          }
+        },
+        "edition": "2021",
+        "version": "0.52.4"
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "windows_aarch64_gnullvm 0.52.4": {
+      "name": "windows_aarch64_gnullvm",
+      "version": "0.52.4",
+      "package_url": "https://github.com/microsoft/windows-rs",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/windows_aarch64_gnullvm/0.52.4/download",
+          "sha256": "bcf46cf4c365c6f2d1cc93ce535f2c8b244591df96ceee75d8e83deb70a9cac9"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "windows_aarch64_gnullvm",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        },
+        {
+          "BuildScript": {
+            "crate_name": "build_script_build",
+            "crate_root": "build.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "windows_aarch64_gnullvm",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "windows_aarch64_gnullvm 0.52.4",
+              "target": "build_script_build"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.52.4"
+      },
+      "build_script_attrs": {
+        "data_glob": [
+          "**"
+        ]
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "windows_aarch64_msvc 0.52.4": {
+      "name": "windows_aarch64_msvc",
+      "version": "0.52.4",
+      "package_url": "https://github.com/microsoft/windows-rs",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/windows_aarch64_msvc/0.52.4/download",
+          "sha256": "da9f259dd3bcf6990b55bffd094c4f7235817ba4ceebde8e6d11cd0c5633b675"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "windows_aarch64_msvc",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        },
+        {
+          "BuildScript": {
+            "crate_name": "build_script_build",
+            "crate_root": "build.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "windows_aarch64_msvc",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "windows_aarch64_msvc 0.52.4",
+              "target": "build_script_build"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.52.4"
+      },
+      "build_script_attrs": {
+        "data_glob": [
+          "**"
+        ]
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "windows_i686_gnu 0.52.4": {
+      "name": "windows_i686_gnu",
+      "version": "0.52.4",
+      "package_url": "https://github.com/microsoft/windows-rs",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/windows_i686_gnu/0.52.4/download",
+          "sha256": "b474d8268f99e0995f25b9f095bc7434632601028cf86590aea5c8a5cb7801d3"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "windows_i686_gnu",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        },
+        {
+          "BuildScript": {
+            "crate_name": "build_script_build",
+            "crate_root": "build.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "windows_i686_gnu",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "windows_i686_gnu 0.52.4",
+              "target": "build_script_build"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.52.4"
+      },
+      "build_script_attrs": {
+        "data_glob": [
+          "**"
+        ]
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "windows_i686_msvc 0.52.4": {
+      "name": "windows_i686_msvc",
+      "version": "0.52.4",
+      "package_url": "https://github.com/microsoft/windows-rs",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/windows_i686_msvc/0.52.4/download",
+          "sha256": "1515e9a29e5bed743cb4415a9ecf5dfca648ce85ee42e15873c3cd8610ff8e02"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "windows_i686_msvc",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        },
+        {
+          "BuildScript": {
+            "crate_name": "build_script_build",
+            "crate_root": "build.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "windows_i686_msvc",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "windows_i686_msvc 0.52.4",
+              "target": "build_script_build"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.52.4"
+      },
+      "build_script_attrs": {
+        "data_glob": [
+          "**"
+        ]
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "windows_x86_64_gnu 0.52.4": {
+      "name": "windows_x86_64_gnu",
+      "version": "0.52.4",
+      "package_url": "https://github.com/microsoft/windows-rs",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/windows_x86_64_gnu/0.52.4/download",
+          "sha256": "5eee091590e89cc02ad514ffe3ead9eb6b660aedca2183455434b93546371a03"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "windows_x86_64_gnu",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        },
+        {
+          "BuildScript": {
+            "crate_name": "build_script_build",
+            "crate_root": "build.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "windows_x86_64_gnu",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "windows_x86_64_gnu 0.52.4",
+              "target": "build_script_build"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.52.4"
+      },
+      "build_script_attrs": {
+        "data_glob": [
+          "**"
+        ]
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "windows_x86_64_gnullvm 0.52.4": {
+      "name": "windows_x86_64_gnullvm",
+      "version": "0.52.4",
+      "package_url": "https://github.com/microsoft/windows-rs",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/windows_x86_64_gnullvm/0.52.4/download",
+          "sha256": "77ca79f2451b49fa9e2af39f0747fe999fcda4f5e241b2898624dca97a1f2177"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "windows_x86_64_gnullvm",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        },
+        {
+          "BuildScript": {
+            "crate_name": "build_script_build",
+            "crate_root": "build.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "windows_x86_64_gnullvm",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "windows_x86_64_gnullvm 0.52.4",
+              "target": "build_script_build"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.52.4"
+      },
+      "build_script_attrs": {
+        "data_glob": [
+          "**"
+        ]
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "windows_x86_64_msvc 0.52.4": {
+      "name": "windows_x86_64_msvc",
+      "version": "0.52.4",
+      "package_url": "https://github.com/microsoft/windows-rs",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/windows_x86_64_msvc/0.52.4/download",
+          "sha256": "32b752e52a2da0ddfbdbcc6fceadfeede4c939ed16d13e648833a61dfb611ed8"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "windows_x86_64_msvc",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        },
+        {
+          "BuildScript": {
+            "crate_name": "build_script_build",
+            "crate_root": "build.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "windows_x86_64_msvc",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "windows_x86_64_msvc 0.52.4",
+              "target": "build_script_build"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.52.4"
+      },
+      "build_script_attrs": {
+        "data_glob": [
+          "**"
+        ]
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
+    },
+    "zeroize 1.7.0": {
+      "name": "zeroize",
+      "version": "1.7.0",
+      "package_url": "https://github.com/RustCrypto/utils/tree/master/zeroize",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/zeroize/1.7.0/download",
+          "sha256": "525b4ec142c6b68a2d10f01f7bbf6755599ca3f81ea53b8431b7dd348f5fdb2d"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "zeroize",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "zeroize",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": {
+          "common": [
+            "alloc",
+            "default"
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "1.7.0"
+      },
+      "license": "Apache-2.0 OR MIT",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": null
     }
   },
   "binary_crates": [],
@@ -1618,6 +3025,7 @@
     "aarch64-linux-android": [
       "aarch64-linux-android"
     ],
+    "aarch64-pc-windows-gnullvm": [],
     "aarch64-pc-windows-msvc": [
       "aarch64-pc-windows-msvc"
     ],
@@ -1638,6 +3046,92 @@
     ],
     "armv7-unknown-linux-gnueabi": [
       "armv7-unknown-linux-gnueabi"
+    ],
+    "cfg(all(any(target_os = \"android\", target_os = \"linux\"), any(target_arch = \"aarch64\", target_arch = \"arm\")))": [
+      "aarch64-linux-android",
+      "aarch64-unknown-linux-gnu",
+      "aarch64-unknown-nixos-gnu",
+      "arm-unknown-linux-gnueabi",
+      "armv7-linux-androideabi",
+      "armv7-unknown-linux-gnueabi"
+    ],
+    "cfg(all(target_arch = \"aarch64\", target_env = \"msvc\", not(windows_raw_dylib)))": [
+      "aarch64-pc-windows-msvc"
+    ],
+    "cfg(all(target_arch = \"aarch64\", target_os = \"windows\"))": [
+      "aarch64-pc-windows-msvc"
+    ],
+    "cfg(all(target_arch = \"x86\", target_env = \"gnu\", not(windows_raw_dylib)))": [
+      "i686-unknown-linux-gnu"
+    ],
+    "cfg(all(target_arch = \"x86\", target_env = \"msvc\", not(windows_raw_dylib)))": [
+      "i686-pc-windows-msvc"
+    ],
+    "cfg(all(target_arch = \"x86_64\", target_env = \"gnu\", not(target_abi = \"llvm\"), not(windows_raw_dylib)))": [
+      "x86_64-unknown-linux-gnu",
+      "x86_64-unknown-nixos-gnu"
+    ],
+    "cfg(all(target_arch = \"x86_64\", target_env = \"msvc\", not(windows_raw_dylib)))": [
+      "x86_64-pc-windows-msvc"
+    ],
+    "cfg(any(target_arch = \"aarch64\", target_arch = \"arm\", target_arch = \"x86\", target_arch = \"x86_64\"))": [
+      "aarch64-apple-darwin",
+      "aarch64-apple-ios",
+      "aarch64-apple-ios-sim",
+      "aarch64-fuchsia",
+      "aarch64-linux-android",
+      "aarch64-pc-windows-msvc",
+      "aarch64-unknown-linux-gnu",
+      "aarch64-unknown-nixos-gnu",
+      "aarch64-unknown-nto-qnx710",
+      "arm-unknown-linux-gnueabi",
+      "armv7-linux-androideabi",
+      "armv7-unknown-linux-gnueabi",
+      "i686-apple-darwin",
+      "i686-linux-android",
+      "i686-pc-windows-msvc",
+      "i686-unknown-freebsd",
+      "i686-unknown-linux-gnu",
+      "thumbv7em-none-eabi",
+      "thumbv8m.main-none-eabi",
+      "x86_64-apple-darwin",
+      "x86_64-apple-ios",
+      "x86_64-fuchsia",
+      "x86_64-linux-android",
+      "x86_64-pc-windows-msvc",
+      "x86_64-unknown-freebsd",
+      "x86_64-unknown-linux-gnu",
+      "x86_64-unknown-nixos-gnu",
+      "x86_64-unknown-none"
+    ],
+    "cfg(target_os = \"wasi\")": [
+      "wasm32-wasi"
+    ],
+    "cfg(unix)": [
+      "aarch64-apple-darwin",
+      "aarch64-apple-ios",
+      "aarch64-apple-ios-sim",
+      "aarch64-fuchsia",
+      "aarch64-linux-android",
+      "aarch64-unknown-linux-gnu",
+      "aarch64-unknown-nixos-gnu",
+      "aarch64-unknown-nto-qnx710",
+      "arm-unknown-linux-gnueabi",
+      "armv7-linux-androideabi",
+      "armv7-unknown-linux-gnueabi",
+      "i686-apple-darwin",
+      "i686-linux-android",
+      "i686-unknown-freebsd",
+      "i686-unknown-linux-gnu",
+      "powerpc-unknown-linux-gnu",
+      "s390x-unknown-linux-gnu",
+      "x86_64-apple-darwin",
+      "x86_64-apple-ios",
+      "x86_64-fuchsia",
+      "x86_64-linux-android",
+      "x86_64-unknown-freebsd",
+      "x86_64-unknown-linux-gnu",
+      "x86_64-unknown-nixos-gnu"
     ],
     "i686-apple-darwin": [
       "i686-apple-darwin"
@@ -1690,6 +3184,7 @@
     "x86_64-linux-android": [
       "x86_64-linux-android"
     ],
+    "x86_64-pc-windows-gnullvm": [],
     "x86_64-pc-windows-msvc": [
       "x86_64-pc-windows-msvc"
     ],
@@ -1708,7 +3203,8 @@
   },
   "direct_deps": [
     "gdal 0.15.0",
-    "gdal-sys 0.9.0"
+    "gdal-sys 0.9.0",
+    "rustls-ffi 0.12.0"
   ],
   "direct_dev_deps": []
 }

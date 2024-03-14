@@ -1,5 +1,3 @@
-# From https://github.com/bazelbuild/bazel-central-registry/tree/main/modules/zstd
-
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])

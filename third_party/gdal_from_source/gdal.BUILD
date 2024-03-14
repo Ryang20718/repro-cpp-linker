@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Waabi Innovation. All rights reserved.
+
 load("@rules_foreign_cc//foreign_cc:defs.bzl", "configure_make")
 
 filegroup(
@@ -7,8 +7,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-# MIT style license
-# https://github.com/OSGeo/gdal#security-ov-file
 configure_make(
     name = "gdal_from_source",
     lib_name = "libgdal",
@@ -21,7 +19,6 @@ configure_make(
         "libgdal.a",
     ],
     out_data_dirs=[
-        # TODO: This isn't correct as the `$EXT_BUILD_DEPS` isn't being resolved
         "$$EXT_BUILD_DEPS/proj/proj/share/proj",
     ],
     lib_source = ":all_srcs",
@@ -37,15 +34,15 @@ configure_make(
         "--with-expat=no",
         '--with-curl="${EXT_BUILD_DEPS}/curl"',
         '--with-geotiff=internal',
-        '--with-gif=internal', # TODO: Use https://github.com/bazelbuild/bazel-central-registry/tree/main/modules/giflib
+        '--with-gif=internal',
         '--with-lerc=internal',
         '--with-jpeg="${EXT_BUILD_DEPS}/jpeg"',
-        '--with-libtiff=internal', # TODO: Should use @tiff
+        '--with-libtiff=internal',
         '--with-libz="${EXT_BUILD_DEPS}/lib"',
-        '--with-png="internal"', # TODO: Use https://github.com/bazelbuild/bazel-central-registry/tree/main/modules/libpng
+        '--with-png="internal"',
         '--with-proj="${EXT_BUILD_DEPS}/proj/"',
     ] + select({
-        "@platforms//cpu:arm64": ["--host=aarch64"], # Cross compilation support
+        "@platforms//cpu:arm64": ["--host=aarch64"],
         "//conditions:default": [],
     }),
     deps = [
@@ -57,10 +54,7 @@ configure_make(
     ],
     data = ["@proj//:proj_dir"],
     args = ["-j 8"],
-    # If you need to depend on this target, use third_party:gdal_cc
     visibility = ["@//third_party:__subpackages__"],
-    # This target only partially works for compilation on x86
-    # Comment out this constraint if attempting to resolve remaining x86 issues
     target_compatible_with = [
         "@platforms//cpu:arm64",
     ],

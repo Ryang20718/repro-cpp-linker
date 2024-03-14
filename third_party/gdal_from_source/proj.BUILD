@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Waabi Innovation. All rights reserved.
+
 load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
 
 filegroup(
@@ -6,8 +6,6 @@ filegroup(
     srcs = glob(["**"]),
 )
 
-# MIT style License
-# https://github.com/OSGeo/PROJ#License-1-ov-file
 cmake(
     name = "proj",
     lib_source = ":all_srcs",
@@ -23,7 +21,6 @@ cmake(
         "EXE_SQLITE3": "$SQLITE3_EXECUTEABLE",
     },
     env = {
-        # `proj` requires the sqlite3 shell to build a database during compilation
         "SQLITE3_EXECUTEABLE": "$(execpath @sqlite3//:shell)",
     },
     out_include_dir = "include",
@@ -32,7 +29,6 @@ cmake(
         "libproj.so.25",
     ],
     out_data_dirs = [
-        # proj.db files
         "share",
     ],
     build_args = ["-j 8"],
