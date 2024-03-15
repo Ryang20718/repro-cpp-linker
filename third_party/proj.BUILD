@@ -264,15 +264,16 @@ cc_shared_library(
     name = "proj_so",
     shared_lib_name = "libproj-8d95adc6.so.25.9.2.0",
     deps = [":proj_lib"],
-    exports_filter = [
-        "@tiff//:tiff",
-        "@jpeg//:jpeg",
-        "@jpeg//:jpeg12",
-        "@jpeg//:jpeg16",
-        "@lerc//:lerc",
-        "@zstd//:zstd",
-        "@zlib//:z",
-    ],
+    # We need to export in 7.1.0 bazel version, but this causes linker errors
+    # exports_filter = [
+    #     "@tiff//:tiff",
+    #     "@jpeg//:jpeg",
+    #     "@jpeg//:jpeg12",
+    #     "@jpeg//:jpeg16",
+    #     "@lerc//:lerc",
+    #     "@zstd//:zstd",
+    #     "@zlib//:z",
+    # ],
     visibility = ["//visibility:public"],
 )
 
