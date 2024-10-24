@@ -17,7 +17,7 @@ SPECIALIZED_COPTS = select({
 
 copy_file(
     name = "expand_gdal_version",
-    src = "gcore/gdal_version.h.in", 
+    src = "gcore/gdal_version.h.in",
     out = "gdal_version/gdal_version.h",
 )
 
@@ -890,6 +890,8 @@ cc_library(
 
 cc_shared_library(
     name = "gdal_so",
+    # `libgdal.so.31` was the name of the shared object used by the version
+    # of GDAL distributed through pypi.
     shared_lib_name = "libgdal.so.31",
     deps = [
         ":alg",
@@ -957,3 +959,22 @@ EXTENSIONS = {
     )
     for (name, src) in EXTENSIONS.items()
 ]
+
+py_library(
+    name = "gdal_py",
+    imports = ["swig/python"],
+    srcs = [
+        "swig/python/osgeo/__init__.py",
+        "swig/python/osgeo/gdal.py",
+        "swig/python/osgeo/gdal_array.py",
+        "swig/python/osgeo/gdalconst.py",
+        "swig/python/osgeo/gdalnumeric.py",
+        "swig/python/osgeo/ogr.py",
+        "swig/python/osgeo/osr.py",
+        "swig/python/osgeo/utils.py",
+    ],
+    data = [name for name in EXTENSIONS] + [
+        ":gdal",
+    ],
+    visibility = ["//visibility:public"],
+)

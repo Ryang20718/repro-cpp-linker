@@ -251,6 +251,21 @@ genrule(
     outs = ["proj.db"],
 )
 
+cc_shared_library(
+    name = "proj_so_deps",
+    shared_lib_name = "libproj_so_deps.so",
+    deps = [
+        "@tiff//:tiff",
+        "@jpeg//:jpeg",
+        "@jpeg//:jpeg12",
+        "@jpeg//:jpeg16",
+        "@lerc//:lerc",
+        "@zstd//:zstd",
+        "@zlib//:z",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 dir(
     name = "proj_data",
     srcs = [
@@ -262,18 +277,10 @@ dir(
 
 cc_shared_library(
     name = "proj_so",
+    # The name must match what is packaged in the Python wheel
     shared_lib_name = "libproj-8d95adc6.so.25.9.2.0",
+    dynamic_deps = [":proj_so_deps"],
     deps = [":proj_lib"],
-    # We need to export in 7.1.0 bazel version, but this causes linker errors
-    # exports_filter = [
-    #     "@tiff//:tiff",
-    #     "@jpeg//:jpeg",
-    #     "@jpeg//:jpeg12",
-    #     "@jpeg//:jpeg16",
-    #     "@lerc//:lerc",
-    #     "@zstd//:zstd",
-    #     "@zlib//:z",
-    # ],
     visibility = ["//visibility:public"],
 )
 
@@ -281,6 +288,7 @@ cc_library(
     name = "proj",
     srcs = [
         ":proj_so",
+        ":proj_so_deps",
     ],
     deps = [
         ":hdrs",
